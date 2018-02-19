@@ -83,4 +83,9 @@ public class Word {
 
     setPointValue(points);
   }
+
+  @Override
+  public String toString() {
+    return "\"" + word + "\"";
+  }
 }

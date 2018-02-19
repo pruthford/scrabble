@@ -25,7 +25,7 @@ public class WordsHandler extends AbstractHandler {
     response.setContentType("text/html; charset=utf-8");
     response.setStatus(HttpServletResponse.SC_OK);
 
-    String body = "Scrabble Words:\n";
+    String body = "[";
 
     String w = httpServletRequest.getPathInfo().toLowerCase();
 
@@ -37,15 +37,13 @@ public class WordsHandler extends AbstractHandler {
 
     List<Word> sortedWords = wordSubset.stream().sorted(byPoints).collect(Collectors.toList());
 
-    for (Word word : sortedWords) {
-      body += StringUtils.join("[" + word.getWord() + ": " + word.getPointValue() + "]", "\n");
+    if (!sortedWords.isEmpty()) {
+      body += StringUtils.join(sortedWords, ",");
     }
 
     PrintWriter out = response.getWriter();
 
-    if (body != null) {
-      out.println(body);
-    }
+    out.println(body + "]");
 
     request.setHandled(true);
   }
