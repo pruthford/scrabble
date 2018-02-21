@@ -22,6 +22,10 @@ public class ScrabbleWordsMain {
 
   private final static String wordListURI = "http://www-01.sil.org/linguistics/wordlists/english/wordlist/wordsEn.txt";
 
+  /***
+   * Main driver method
+   * @param args
+   */
   public static void main(String[] args) {
     try {
       Server server = new Server(8080);

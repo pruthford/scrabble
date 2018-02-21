@@ -16,6 +16,10 @@ public class Word {
   private Multiset<String> lettersContained;
   private Integer pointValue;
 
+  /***
+   *
+   * @param word String
+   */
   public Word(String word) {
     this.word = word;
 
@@ -25,38 +29,74 @@ public class Word {
     calculateValue();
   }
 
+  /***
+   *
+   * @return Integer
+   */
   public Integer getPointValue() {
     return pointValue;
   }
 
+  /***
+   *
+   * @param pointValue Integer
+   */
   public void setPointValue(Integer pointValue) {
     this.pointValue = pointValue;
   }
 
+  /***
+   *
+   * @return Integer
+   */
   public Integer getLength() {
     return length;
   }
 
+  /***
+   *
+   * @param length Integer
+   */
   public void setLength(Integer length) {
     this.length = length;
   }
 
+  /***
+   *
+   * @return String
+   */
   public String getWord() {
     return word;
   }
 
+  /***
+   *
+   * @param word String
+   */
   public void setWord(String word) {
     this.word = word;
   }
 
+  /***
+   *
+   * @return Multiset<String>
+   */
   public Multiset<String> getLettersContained() {
     return lettersContained;
   }
 
+  /***
+   *
+   * @param lettersContained Multiset<String>
+   */
   public void setLettersContained(Multiset<String> lettersContained) {
     this.lettersContained = lettersContained;
   }
 
+  /***
+   *
+   * @param word String
+   */
   protected void addLettersContained(String word) {
     if (lettersContained == null) {
       lettersContained = HashMultiset.create();
@@ -69,6 +109,9 @@ public class Word {
     }
   }
 
+  /***
+   * Calculated the total point value of a scrabble word
+   */
   protected void calculateValue() {
     Integer points = 0;
     LetterValue letterValue = new LetterValue();
@@ -87,6 +130,10 @@ public class Word {
     setPointValue(points);
   }
 
+  /***
+   *
+   * @return Word surrounded by "'s
+   */
   @Override
   public String toString() {
     return "\"" + word + "\"";

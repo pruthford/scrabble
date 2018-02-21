@@ -14,6 +14,15 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 
 public class WordsHandler extends AbstractHandler {
 
+  /***
+   * handler for /words/*
+   * @param s
+   * @param request
+   * @param httpServletRequest
+   * @param response
+   * @throws IOException
+   * @throws ServletException
+   */
   public void handle(String s, Request request, HttpServletRequest httpServletRequest,
                      HttpServletResponse response) throws IOException, ServletException {
     response.setContentType("text/html; charset=utf-8");

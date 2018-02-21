@@ -28,11 +28,16 @@ import com.scrabble.dto.Word;
  */
 public class WordListUtil {
 
+  /***
+   * Gets all the scrabble words
+   * @param w A set of letters to create words
+   * @return A list of words sorted by scrabble point value
+   */
   public static String getScrabbleWords(String w) {
 
     String body = "[";
 
-    if (StringUtils.isBlank(w)){
+    if (StringUtils.isBlank(w)) {
       return body + "]";
     }
 
@@ -50,6 +55,10 @@ public class WordListUtil {
     return body + "]";
   }
 
+  /***
+   * Gets the list of words from the provided uri
+   * @param uri uri to get words
+   */
   public static void retrieveWords(String uri) {
     try {
 
@@ -75,6 +84,10 @@ public class WordListUtil {
     }
   }
 
+  /***
+   * Method to load wordMap
+   * @param word Adds a word to wordMap
+   */
   private static void loadWordMap(String word) {
     Word w = new Word(word);
 
@@ -87,10 +100,16 @@ public class WordListUtil {
     }
   }
 
+  /***
+   * Gets the subset of the words from wordmap that contain the letters in the input word
+   * @param inputLetters set of letters
+   * @param length length of the input phrase
+   * @return Unsorted set of words that that are made from the input letters
+   */
   public static Set<Word> getWordSubset(Multiset<String> inputLetters, final Integer length) {
     Set<Word> validWords = Sets.newHashSet();
 
-    if (length == 0){
+    if (length == 0) {
       return Sets.newHashSet();
     }
 
@@ -102,17 +121,22 @@ public class WordListUtil {
       try {
         List<Word> words = wordMap.get(letter);
         validWords.addAll(words.stream().filter(and).collect(Collectors.toList()));
-      } catch (NullPointerException e){
+      } catch (NullPointerException e) {
         continue;
       }
-
     }
 
     return validWords.stream().filter(word -> checkOccurrences(inputLetters, word) == 0).collect(Collectors.toSet());
   }
 
+  /***
+   * Checks the occurrences of a letter in the set to ensure only the correct # are in the scrabble word
+   * @param inputLetters a set of letters
+   * @param validWords a word
+   * @return 0 for success 1 for failure
+   */
   public static int checkOccurrences(Multiset<String> inputLetters, Word validWords) {
-    if (inputLetters == null || validWords == null){
+    if (inputLetters == null || validWords == null) {
       return 1;
     }
 
@@ -130,10 +154,15 @@ public class WordListUtil {
     return 0;
   }
 
+  /***
+   *
+   * @param letters A set of letters
+   * @return A map of the letters in a word and the number of times they occur
+   */
   public static Map<String, Integer> getOccurrenceMap(Multiset<String> letters) {
     Map<String, Integer> occurrences = Maps.newHashMap();
 
-    if(letters == null){
+    if (letters == null) {
       return occurrences;
     }
 
