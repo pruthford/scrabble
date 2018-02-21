@@ -2,6 +2,7 @@ package com.scrabble.dto;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 
@@ -17,7 +18,8 @@ public class Word {
 
   public Word(String word) {
     this.word = word;
-    this.length = word.length();
+
+    this.length = Strings.isNullOrEmpty(word) ? 0 : word.length();
 
     addLettersContained(word);
     calculateValue();
@@ -55,7 +57,7 @@ public class Word {
     this.lettersContained = lettersContained;
   }
 
-  private void addLettersContained(String word) {
+  protected void addLettersContained(String word) {
     if (lettersContained == null) {
       lettersContained = HashMultiset.create();
     }
@@ -73,7 +75,8 @@ public class Word {
 
     for (String letter : lettersContained) {
       try {
-        points += letterValue.values.get(letter);
+        points += letterValue.values.get(letter) !=
+            null ? letterValue.values.get(letter) : 0;
       } catch (NullPointerException e) {
         System.out.println("Cannot find letter: " + letter);
         System.out.println("Word: " + word);
